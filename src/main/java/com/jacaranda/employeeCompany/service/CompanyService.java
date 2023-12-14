@@ -18,5 +18,15 @@ public class CompanyService {
 		return companyRepository.findAll();
 	}
 	
+	public void addCompany(Company company) {
+		companyRepository.save(company);
+	}
 	
+	public void deleteCompany(Company company) {
+		companyRepository.delete(company);
+	}
+	
+	public void editCompany(Company company) {
+		addCompany(company);
+	}
 }
