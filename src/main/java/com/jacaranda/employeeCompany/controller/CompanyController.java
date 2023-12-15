@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.employeeCompany.model.Company;
@@ -24,7 +25,7 @@ public class CompanyController {
 		List<Company> listCompanies = companyService.getCompanies();
 		model.addAttribute("listCompanies", listCompanies);
 		
-		return "company/listCompanies";
+		return "/company/listCompanies";
 	}
 	
 	@GetMapping("/testLayout")
@@ -37,7 +38,7 @@ public class CompanyController {
 		Company company = new Company();
 		model.addAttribute("company", company);
 		
-		return "company/addCompany";
+		return "/company/addCompany";
 	}
 	
 	@GetMapping("/saveCompany")
@@ -47,14 +48,14 @@ public class CompanyController {
 		
 		companyService.addCompany(companySave);
 		model.addAttribute("add", "Compañia añadida con éxito");
-		return "company/addCompany";
+		return "/company/addCompany";
 	}
 	
 	@GetMapping("/deleteCompany")
 	public String showDeleteCompany(Model model, @RequestParam("id") Company company) {
 		model.addAttribute("company", company);
 
-		return "company/deleteCompany";
+		return "/company/deleteCompany";
 	}
 	
 	@GetMapping("/deleteCompanyConfirm")
@@ -64,14 +65,13 @@ public class CompanyController {
 		companyService.deleteCompany(companyDelete);
 		model.addAttribute("delete","Compañia eliminada correctamente");
 
-		return "company/deleteCompany";
+		return "/company/deleteCompany";
 	}
 	
 	@GetMapping("/editCompany")
 	public String showEditCompany(Model model, @RequestParam("id") Company company) {
 		model.addAttribute("company", company);
-		
-		return "company/editCompany";
+		return "/company/editCompany";
 	}
 	
 	@GetMapping("/editCompanyConfirm")
@@ -79,6 +79,6 @@ public class CompanyController {
 		model.addAttribute("company", companyEdit);
 		companyService.editCompany(companyEdit);
 		model.addAttribute("edit","Compañia editada correctamente");
-		return "company/editCompany";
+		return "/company/editCompany";
 	}
 }

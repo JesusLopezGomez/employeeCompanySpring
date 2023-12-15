@@ -27,13 +27,13 @@
 		<td>
 			<form th:action="@{deleteCompany}">
 				<input type="text" th:value="${companyL.id}" name="id" id="id" hidden>
-				<button class="btn btn-info" type="submit">Borrar</button>
+				<button class="btn btn-info" type="submit" value="delete" name="delete">Borrar</button>
 			</form>
 		</td>
 		<td>
 			<form th:action="@{editCompany}">
 				<input type="text" th:value="${companyL.id}" name="id" id="id" hidden>
-				<button class="btn btn-info" type="submit">Editar</button>
+				<button class="btn btn-info" type="submit" value="edit" name="edit">Editar</button>
 			</form>
 		</td>
 	</tr>

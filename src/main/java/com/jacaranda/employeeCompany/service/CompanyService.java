@@ -28,5 +28,7 @@ public class CompanyService {
 	
 	public void editCompany(Company company) {
 		addCompany(company);
+		
 	}
+	
 }

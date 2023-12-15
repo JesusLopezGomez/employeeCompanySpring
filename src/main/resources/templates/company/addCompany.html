@@ -12,13 +12,7 @@
 	          <div class="text-center">
 	            <h1>Añadir Compañia</h1>
 	          </div>
-	
-	          <form method="get" th:action="@{saveCompany}" th:object="${company}">
-		           <div class=" mb-3">
-		   				<label for="id" class="form-label">ID</label>
-		   				<input type="text" th:field="*{id}" class="form-control" id="id" name="id" placeholder="Ingresa id de compañia" required>
-		           </div>
-		
+	          <form method="get" th:action="@{saveCompany}" th:object="${company}">	
 		           <div class=" mb-3">
 		            	<label for="nameCompany" class="form-label">Nombre de compañia</label>
 		   				<input type="text" th:field="*{name}" class="form-control" id="nameCompany" name="nameCompany" placeholder="Ingresa nombre de compañia" required >

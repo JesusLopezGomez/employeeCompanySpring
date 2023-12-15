@@ -11,62 +11,52 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "company")
-public class Company {
-	@Id
+@Table(name = "project")
+public class Project {
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private Integer id;
 	
 	private String name;
-	private String address;
-	private String city;
 	
-	@OneToMany(mappedBy = "company")
+	private String butget;
+
+	@OneToMany(mappedBy = "project")
 	private List<CompanyProject> companyProject;
 	
-	@OneToMany(mappedBy = "company")
-	private List<Employee> listEmployee;
+	@OneToMany(mappedBy = "project")
+	private List<EmployeeProject> employeeProject;
 	
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
-		return address;
+
+	public String getButget() {
+		return butget;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setButget(String butget) {
+		this.butget = butget;
 	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public List<CompanyProject> getCompanyProject() {
-		return companyProject;
-	}
-	public void setCompanyProject(List<CompanyProject> companyProject) {
-		this.companyProject = companyProject;
-	}
-	public List<Employee> getListEmployee() {
-		return listEmployee;
-	}
-	public void setListEmployee(List<Employee> listEmployee) {
-		this.listEmployee = listEmployee;
-	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,9 +65,8 @@ public class Company {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Company other = (Company) obj;
+		Project other = (Project) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 }
