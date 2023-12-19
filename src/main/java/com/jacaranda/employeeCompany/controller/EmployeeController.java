@@ -1,8 +1,10 @@
 package com.jacaranda.employeeCompany.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,16 @@ public class EmployeeController {
 	CompanyService companyService;
 	
 	@GetMapping("/listEmployees")
-	public String listEmployees(Model model) {
-		List<Employee> listEmployees = employeeService.getEmployees();
-		model.addAttribute("listEmployees", listEmployees);
+	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR) {		
+		Page<Employee> pageEmployee =  employeeService.getEmployees(pageNumberR.orElse("1"), 10);
+		Integer totalItems = (int) pageEmployee.getTotalElements();
+		Integer pageNumber = pageEmployee.getNumber();
+		Integer totalPages = pageEmployee.getTotalPages();
+		
+		model.addAttribute("totalItems", pageEmployee);
+		model.addAttribute("totalElements", totalItems);
+		model.addAttribute("currentPage", pageNumber+1);
+		model.addAttribute("totalPages",totalPages);
 		return "/employee/listEmployees";
 	}
 	
