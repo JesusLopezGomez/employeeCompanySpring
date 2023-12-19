@@ -26,12 +26,12 @@ public class EmployeeController {
 	
 	@GetMapping("/listEmployees")
 	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR) {		
-		Page<Employee> pageEmployee =  employeeService.getEmployees(pageNumberR.orElse("1"), 10);
+		Page<Employee> pageEmployee = employeeService.getEmployees(pageNumberR.orElse("1"), 10);
 		Integer totalItems = (int) pageEmployee.getTotalElements();
 		Integer pageNumber = pageEmployee.getNumber();
 		Integer totalPages = pageEmployee.getTotalPages();
 		
-		model.addAttribute("totalItems", pageEmployee);
+		model.addAttribute("totalItems", pageEmployee.getContent());
 		model.addAttribute("totalElements", totalItems);
 		model.addAttribute("currentPage", pageNumber+1);
 		model.addAttribute("totalPages",totalPages);
