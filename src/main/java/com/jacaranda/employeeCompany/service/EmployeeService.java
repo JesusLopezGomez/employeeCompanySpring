@@ -30,13 +30,20 @@ public class EmployeeService {
 		save(employee);
 	}
 
-	public Page<Employee> getEmployees(String pageNum, int pageSize,String order) {
+	public Page<Employee> getEmployees(String pageNum, int pageSize,String order,String ad) {
 		Pageable pageable = null;
-		
-		try {
-			pageable = PageRequest.of(Integer.valueOf(pageNum) -1, pageSize,Sort.by(order).ascending());
-		} catch (Exception e) {
-			pageable = PageRequest.of(0, pageSize,Sort.by(order).ascending());
+		if(ad.equals("desc")) {
+			try {
+				pageable = PageRequest.of(Integer.valueOf(pageNum) -1, pageSize,Sort.by(order).descending());
+			} catch (Exception e) {
+				pageable = PageRequest.of(0, pageSize,Sort.by(order).descending());
+			}			
+		}else {
+			try {
+				pageable = PageRequest.of(Integer.valueOf(pageNum) -1, pageSize,Sort.by(order).ascending());
+			} catch (Exception e) {
+				pageable = PageRequest.of(0, pageSize,Sort.by(order).ascending());
+			}
 		}
 		return employeeRepository.findAll(pageable);
 	}

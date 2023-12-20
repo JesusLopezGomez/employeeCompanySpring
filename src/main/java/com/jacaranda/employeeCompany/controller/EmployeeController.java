@@ -25,8 +25,8 @@ public class EmployeeController {
 	CompanyService companyService;
 	
 	@GetMapping("/listEmployees")
-	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR, @RequestParam("order") Optional<String> order) {		
-		Page<Employee> pageEmployee = employeeService.getEmployees(pageNumberR.orElse("1"), 10,order.orElse("id"));
+	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR, @RequestParam("order") Optional<String> order, @RequestParam("asc") Optional<Boolean> asc) {				
+		Page<Employee> pageEmployee = employeeService.getEmployees(pageNumberR.orElse("1"), 10,order.orElse("id"),asc.orElse(false) ? "desc" : "");
 		
 		Integer totalItems = (int) pageEmployee.getTotalElements();
 		Integer pageNumber = pageEmployee.getNumber();
@@ -36,6 +36,13 @@ public class EmployeeController {
 		model.addAttribute("totalElements", totalItems);
 		model.addAttribute("currentPage", pageNumber+1);
 		model.addAttribute("totalPages",totalPages);
+		
+		if(asc.orElse(false)) {
+			model.addAttribute("asc", false);						
+		}else {
+			model.addAttribute("asc", true);						
+		}
+		
 		return "/employee/listEmployees";
 	}
 	
