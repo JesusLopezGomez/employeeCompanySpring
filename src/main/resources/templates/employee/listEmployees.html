@@ -5,13 +5,14 @@
 <nav th:replace="layout/menu :: menuJacaranda"></nav>
 
 <h1 align="center">Listado de Empleados</h1>
-
+<div>
+</div>
 <table class="table">
   <thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>Nombre</th>
-			<th>Apellido</th>
+			<th><a th:href="@{'/listEmployees?order=firstName&orderAD=true&pageNumber='+${currentPage}}">Nombre</a></th>
+			<th><a th:href="@{'/listEmployees?order=lastName&orderAD=true&pageNumber='+${currentPage}}">Apellido</a></th>
 			<th>Email</th>
 			<th>Genero</th>
 			<th>Fecha de nacimiento</th>
