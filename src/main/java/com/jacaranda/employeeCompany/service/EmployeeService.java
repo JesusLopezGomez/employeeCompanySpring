@@ -30,7 +30,7 @@ public class EmployeeService {
 		save(employee);
 	}
 
-	public Page<Employee> getEmployees(String pageNum, int pageSize,String order,String ad) {
+	public Page<Employee> getEmployees(String pageNum, int pageSize,String order,String ad, String filter) {
 		Pageable pageable = null;
 		if(ad.equals("desc")) {
 			try {
@@ -45,6 +45,7 @@ public class EmployeeService {
 				pageable = PageRequest.of(0, pageSize,Sort.by(order).ascending());
 			}
 		}
+		
 		return employeeRepository.findAll(pageable);
 	}
 }

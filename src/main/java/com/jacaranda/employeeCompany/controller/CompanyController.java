@@ -1,6 +1,5 @@
 package com.jacaranda.employeeCompany.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class CompanyController {
 	CompanyService companyService;
 	
 	@GetMapping("/listCompanies")
-	public String listCompany(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR) {
-		Page<Company> pageCompany = companyService.getCompanies(pageNumberR.orElse("1"), 10);
+	public String listCompany(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR, Optional<String> order, @RequestParam("asc") Optional<Boolean> asc) {
+		Page<Company> pageCompany = companyService.getCompanies(pageNumberR.orElse("1"), 10,order.orElse("id"), asc.orElse(false) ? "desc" : "");
 		Integer totalItems = (int) pageCompany.getTotalElements();
 		Integer pageNumber = pageCompany.getNumber();
 		Integer totalPages = pageCompany.getTotalPages();
@@ -32,6 +31,8 @@ public class CompanyController {
 		model.addAttribute("totalElements", totalItems);
 		model.addAttribute("currentPage", pageNumber+1);
 		model.addAttribute("totalPages",totalPages);
+		model.addAttribute("asc", asc.orElse(true));						
+
 		
 		return "/company/listCompanies";
 	}

@@ -5,14 +5,20 @@
 <nav th:replace="layout/menu :: menuJacaranda"></nav>
 
 <h1 align="center">Listado de compañias</h1>
-
+<br>
+<form th:action="@{/elements}">
+	 Filter: <input type="text" name="keyword" id="keyword" size="50"
+	th:value="${keyword}" required />
+	 <input type="submit" value="Search" />
+	 <input type="reset" value="Clear" id="btnClear">
+</form>
 <table class="table">
   <thead class="thead-dark">
 		<tr>
-			<th>#</th>
-			<th>Nombre</th>
-			<th>Dirección</th>
-			<th>Ciudad</th>
+			<th><a th:href="@{'/listCompanies?order=id&pageNumber='+${currentPage} + '&asc='+${!asc}}">#</a></th>
+			<th><a th:href="@{'/listCompanies?order=name&pageNumber='+${currentPage} + '&asc='+${!asc}}">Nombre</a></th>
+			<th><a th:href="@{'/listCompanies?order=address&pageNumber='+${currentPage} + '&asc='+${!asc}}">Dirección</a></th>
+			<th><a th:href="@{'/listCompanies?order=city&pageNumber='+${currentPage} + '&asc='+${!asc}}">Ciudad</a></th>
 			<th>Borrar</th>
 			<th>Editar</th>
 
