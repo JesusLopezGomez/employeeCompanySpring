@@ -27,7 +27,7 @@ public class EmployeeController {
 	@GetMapping("/listEmployees")
 	public String listEmployees(Model model,@RequestParam("pageNumber") Optional<String> pageNumberR, @RequestParam("order") Optional<String> order,
 			@RequestParam("asc") Optional<Boolean> asc, @RequestParam("keyword") Optional<String> nombre) {				
-		Page<Employee> pageEmployee = employeeService.getEmployees(pageNumberR.orElse("1"), 10,order.orElse("id"), asc.orElse(false) ? "desc" : "");
+		Page<Employee> pageEmployee = employeeService.getEmployees(pageNumberR.orElse("1"), 10,order.orElse("id"), asc.orElse(false) ? "desc" : "",nombre.orElse(""));
 		
 		Integer totalItems = (int) pageEmployee.getTotalElements();
 		Integer pageNumber = pageEmployee.getNumber();

@@ -46,6 +46,10 @@ public class EmployeeService {
 			}
 		}
 		
+		if(!filter.equals("")) {
+			return employeeRepository.findByFirstName(filter, pageable);
+		}
+		
 		return employeeRepository.findAll(pageable);
 	}
 }
